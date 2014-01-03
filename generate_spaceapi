@@ -1,0 +1,79 @@
+#!/bin/ash
+
+space="Bytespeicher"
+logo="https://pbs.twimg.com/profile_images/378800000769511011/a000ec284ff2e7966373b95aa2054864.jpeg"
+url="http://www.bytespeicher.org"
+address="Liebknechtstrasse 8, 99085 Erfurt, Germany"
+lon="50.98271"
+lat="11.03965"
+twitter="@HaspaErfurt"
+email="kontakt@technikkultur-erfurt.de"
+phone="+493617929903"
+irc="irc://irc.hackint.eu/bytespeicher"
+facebook="https://facebook.com/HackerspaceErfurt"
+google_plus="https://plus.google.com/115774236721304179602"
+ml="hackerspace@lists.erfurt.freifunk.net"
+imgopen="http://status.bytespeicher.org/status_open.png"
+imgclosed="http://status.bytespeicher.org/status_closed.png"
+
+n=0
+if [ $(/usr/share/bytespeicher/connected_devices) -eq 0 ]
+then
+        open="false"
+        connected_string="No devices connected"
+else
+        open="true"
+        if [ $(/usr/share/bytespeicher/connected_devices) -eq 1 ]
+        then
+                connected_string="1 device connected"
+        else
+                connected_string="$(/usr/share/bytespeicher/connected_devices) devices connected"
+        fi
+fi
+
+lastchange=$(/usr/share/bytespeicher/connected_devices --last-change)
+
+cat <<EOL
+{
+        "api": "0.13",
+        "space": "$space",
+        "logo": "$logo",
+        "url": "$url",
+        "location": {
+                "address": "$address",
+                "lon": $lon,
+                "lat": $lat
+        },
+        "contact": {
+                "email": "$email",
+                "phone": "$phone",
+                "irc": "$irc",
+                "twitter": "$twitter",
+                "facebook": "$facebook",
+                "google": {
+                        "plus": "$google_plus"
+                },
+                "ml": "$ml"
+        },
+        "issue_report_channels": [
+                "twitter"
+        ],
+        "state": {
+                "icon": {
+                        "open": "$imgopen",
+                        "closed": "$imgclosed"
+                },
+                "open": $open,
+                "lastchange": $lastchange,
+                "message": "$connected_string"
+        },
+        "status": "$connected_string",
+        "open": $open,
+        "icon": {
+                "open": "$imgopen",
+                "closed": "$imgclosed"
+        }
+}
+EOL
+
+
