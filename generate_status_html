@@ -1,0 +1,29 @@
+#!/usr/bin/env python2
+
+import json
+
+from jinja2   import Template
+from datetime import datetime
+
+status_file     = open('/var/www/status.json')
+
+status = json.loads(status_file.read())
+
+if status['state']['open'] == True:
+    icon = status['icon']['open']
+else:
+    icon = status['icon']['closed']
+
+html_template = Template(open('/usr/share/bytespeicher/status_template').read())
+html = html_template.render(
+    status_open = status['state']['open'],
+    status_lastchange = datetime.fromtimestamp(int(status['state']['lastchange'])).strftime('%H:%M:%S %d.%m.%Y'),
+    status_message = status['state']['message'],
+    status_icon = icon,
+    logo = status['logo'],
+    url = status['url'],
+    location = status['location'],
+)
+
+out = open('/var/www/index.html', 'wb+')
+out.write(html)
