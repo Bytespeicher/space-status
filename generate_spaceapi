@@ -31,6 +31,15 @@ else
         fi
 fi
 
+if [ $(/usr/share/bytespeicher/connected_users | sed -n 1p) -eq 0 ]
+then
+        onlineusercount="0"
+        onlineuserlist=""
+else
+        onlineusercount=$(/usr/share/bytespeicher/connected_users | sed -n 1p)
+        onlineuserlist=$(/usr/share/bytespeicher/connected_users | sed -n 2p)
+fi
+
 lastchange=$(/usr/share/bytespeicher/connected_devices --last-change)
 
 cat <<EOL
@@ -72,6 +81,14 @@ cat <<EOL
         "icon": {
                 "open": "$imgopen",
                 "closed": "$imgclosed"
+        },
+        "sensors": {
+                "people_now_present": [
+                {
+                "value": $onlineusercount,
+                "names": [ $onlineuserlist ]
+                }
+                ]
         }
 }
 EOL
