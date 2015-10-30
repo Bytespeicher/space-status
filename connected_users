@@ -1,0 +1,27 @@
+#!/bin/ash
+
+# DHCP leasefile of OpenWRT, option in /etc/config/dhcp
+DHCP=/tmp/dhcp.leases
+
+# Userlist
+# aa:bb:cc:dd:ee:ff Nickname
+USERLIST=userlist.txt
+
+while read LINE; do
+
+    MAC=$(echo $LINE | cut -d' ' -f 2)
+
+    while read LINE2; do
+
+                MAC2=$(echo $LINE2|cut -d' ' -f 1)
+                NAME=$(echo $LINE2|cut -d' ' -f 2)
+                if [ "$MAC" == "$MAC2" ] && $(echo $USERS | grep -v -q "\"$NAME\""); then
+                            USERS="\"$NAME\", ${USERS}"
+                        USERCOUNT=$((USERCOUNT+1))
+                fi
+        done < $USERLIST
+done < $DHCP
+
+# Returns the number of active whitelisted users and sums up multiple devices with the same nick
+echo $USERCOUNT
+echo $USERS|cut -d',' -f -${USERCOUNT}
