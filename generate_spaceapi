@@ -37,7 +37,7 @@ fi
 onlineusercount=$(/usr/share/bytespeicher/connected_users | sed -n 1p)
 if [ ! -z $onlineusercount ] && [ $onlineusercount -gt 0 ]
 then
-        onlineuserlist=",names: ["$(/usr/share/bytespeicher/connected_users | sed -n 2p)"]"
+        onlineuserlist=",\"names\": ["$(/usr/share/bytespeicher/connected_users | sed -n 2p)"]"
 fi
 
 lastchange=$(/usr/share/bytespeicher/connected_devices --last-change)
