@@ -1,5 +1,8 @@
 #!/bin/ash
 
+PATH="/bin:/usr/bin"
+export PATH
+
 space="Bytespeicher"
 logo="https://pbs.twimg.com/profile_images/378800000769511011/a000ec284ff2e7966373b95aa2054864.jpeg"
 url="http://www.bytespeicher.org"
