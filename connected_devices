@@ -1,6 +1,6 @@
 #!/bin/ash
 
-# Replace this with real hostnames(without any domain parts)
+# Include device list with hostnames corresponding with dhcp.leases names
 EXCLUDE_DEVS=devicelist.txt
 
 if [ "$1" == "--all" ]
