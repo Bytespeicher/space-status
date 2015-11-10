@@ -1,7 +1,7 @@
 #!/bin/ash
 
-# Replace this with real hostnames(without any domain parts)
-EXCLUDE_DEVS="device1|device2"
+# Include device list with hostnames corresponding with dhcp.leases names
+EXCLUDE_DEVS=devicelist.txt
 
 if [ "$1" == "--all" ]
 then
@@ -17,9 +17,7 @@ then
                 echo $DEVICES > /tmp/devices.lastchange
         fi
 else
-        time=$(date "+%s")
-        dev_tmp=$(grep -Ev "$EXCLUDE_DEVS" /tmp/dhcp.leases | awk "\$1 > $time" | wc -l)
-        DEVICES=$(grep -Ev "$EXCLUDE_DEVS" /tmp/dhcp.leases | wc -l)
+        DEVICES=$(grep -v -f "$EXCLUDE_DEVS" /tmp/dhcp.leases | wc -l)
 fi
 
 echo "${DEVICES}"
