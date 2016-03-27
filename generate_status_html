@@ -23,6 +23,8 @@ html = html_template.render(
     logo = status['logo'],
     url = status['url'],
     location = status['location'],
+    people_now_present = status['sensors']['people_now_present'][0]['value'],
+    names = ", ".join(status['sensors']['people_now_present'][0]['names']),
 )
 
 out = open('/var/www/index.html', 'wb+')
