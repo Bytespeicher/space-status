@@ -71,7 +71,9 @@
 				<h2>Der Bytespeicher ist <span class="red">geschlossen</span></h2>
 			{% endif %}
 			<p>{{ status_message }}</p>
-			<p><strong>Letzte Aenderung:</strong> {{ status_lastchange }}</p>
+			<p>People present: {{ people_now_present }}</br>
+                        Names: {{ names }}</p>
+			<p><strong>Letzte Änderung:</strong> {{ status_lastchange }}</p>
 		</div>
     <hr>
 </div>
