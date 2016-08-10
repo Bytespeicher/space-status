@@ -4,3 +4,4 @@ userlist.txt
 __pycache__/
 *.pyc
 env/
+config.py
