@@ -1,1 +1,6 @@
 userlist.txt
+*.swp
+*.swo
+__pycache__/
+*.pyc
+env/
