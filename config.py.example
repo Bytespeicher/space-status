@@ -1,0 +1,26 @@
+API_URL = 'http://134.97.126.1/spaceapi.json'
+SAVE_PATH = '/var/www/spaceapi/status.json'
+HTML_PATH = '/var/www/spaceapi/index.html'
+TEMPLATE_PATH = '/usr/share/bytespeicher/status_template'
+
+PLUGINS = {
+    'temperature': {
+        'urls': [
+            'http://134.97.126.41/temp_werkstatt.json'
+        ]
+    }
+}
+
+plugins = [
+    'temperature'
+]
+
+TEMPERATURE = {
+    'URLS': [
+        'http://134.97.126.41/temp_werkstatt.json'
+    ]
+}
+
+plugins = {
+    'temperature'
+}

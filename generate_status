@@ -1,8 +1,0 @@
-#!/bin/bash
-
-/usr/bin/wget -O /var/www/status.json.tmp 'http://134.97.126.1/spaceapi.json' 2>/dev/null
-if [ $(wc -l /var/www/status.json.tmp | awk '{print $1}') -gt 1 ]
-then
-	mv /var/www/status.json.tmp /var/www/status.json
-	/usr/share/bytespeicher/generate_status_html
-fi
