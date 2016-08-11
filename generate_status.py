@@ -23,7 +23,12 @@ for plugin in config.PLUGINS:
         )
     except Exception as e:
         print(e)
-    api_data = plugin_module(api_data)
+
+    old_data = api_data
+    try:
+        api_data = plugin_module(api_data)
+    except:
+        api_data = old_data
 
 
 # The next part will generate the HTML for the status page
