@@ -41,6 +41,8 @@ html = html_template.render(
     logo=api_data['logo'],
     url=api_data['url'],
     location=api_data['location'],
+    people_now_present=api_data['sensors']['people_now_present'][0]['value'],
+    names=", ".join(api_data['sensors']['people_now_present'][0]['names']),
 )
 
 with open(config.HTML_PATH, 'wb+') as html_out:
