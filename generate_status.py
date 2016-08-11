@@ -34,7 +34,7 @@ else:
 if 'names' in api_data['sensors']['people_now_present'][0]:
     people = api_data['sensors']['people_now_present'][0]['names']
 else:
-    people = ''
+    people = []
 
 html_template = Template(open(config.TEMPLATE_PATH).read().decode('utf-8'))
 html = html_template.render(
