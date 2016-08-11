@@ -10,7 +10,7 @@ def temperature(data):
     temperature = []
     try:
         for url in config.PLUGINS['temperature']['urls']:
-            temp_json = json.loads(requests.get(url).text)
+            temp_json = json.loads(requests.get(url, timeout=5).text)
             for loc, temp in temp_json.items():
                 temperature_item = {
                     'value': temp,

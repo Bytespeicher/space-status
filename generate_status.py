@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import sys
 import json
 from datetime import datetime
 
@@ -9,7 +10,11 @@ from jinja2 import Template
 
 import config
 
-api_data = json.loads(requests.get(config.API_URL).text)
+try:
+    api_data = json.loads(requests.get(config.API_URL, timeout=5).text)
+except (requests.ReadTimeout, requests.ConnectionError):
+    print("Error while connecting")
+    sys.exit(1)
 
 for plugin in config.PLUGINS:
     try:
