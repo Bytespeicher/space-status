@@ -49,6 +49,7 @@
 	<style>
 		.green { color: #3d9f35; }
 		.red   { color: #832c2c; }
+		.orange{ color: #a28c2c; }
 	</style>
 </head>
 <body>
@@ -67,6 +68,8 @@
 		<div class="grid_9">
 			{% if status_open %}
 				<h2>Der Bytespeicher ist <span class="green">offen</span></h2>
+			{% elif status_open is none %}
+				<h2>Der Bytespeicher ist <span class="orange">undefiniert</span></h2>
 			{% else %}
 				<h2>Der Bytespeicher ist <span class="red">geschlossen</span></h2>
 			{% endif %}
