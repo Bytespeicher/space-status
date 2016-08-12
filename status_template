@@ -74,7 +74,13 @@
 			<p>People present: {{ people_now_present }}</br>
                         Names: {{ names }}</p>
 			<p><strong>Letzte Änderung:</strong> {{ status_lastchange }}</p>
+			{% if temperatures %}
+				{% for temp in temperatures %}
+				<p><strong>Temperatur {{ temp.location|capitalize }}:</strong> {{ temp.value }} °C</p>
+				{% endfor %}
+			{% endif %}
 		</div>
+
     <hr>
 </div>
 

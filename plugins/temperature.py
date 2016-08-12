@@ -25,3 +25,10 @@ def temperature(data):
     data['sensors']['temperature'] = temperature
 
     return data
+
+
+def temperature_html(data, args):
+    if 'sensors' in data and 'temperature' in data['sensors']:
+        args['temperatures'] = data['sensors']['temperature']
+
+    return args

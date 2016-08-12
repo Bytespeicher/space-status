@@ -46,19 +46,37 @@ if 'names' in api_data['sensors']['people_now_present'][0]:
 else:
     people = ""
 
-html_template = Template(open(config.TEMPLATE_PATH).read().decode('utf-8'))
-html = html_template.render(
-    status_open=api_data['state']['open'],
-    status_lastchange=datetime.fromtimestamp(
+html_parser_args = {
+    'status_open': api_data['state']['open'],
+    'status_lastchange': datetime.fromtimestamp(
         int(api_data['state']['lastchange'])).strftime('%H:%M:%S %d.%m.%Y'),
-    status_message=api_data['state']['message'],
-    status_icon=icon,
-    logo=api_data['logo'],
-    url=api_data['url'],
-    location=api_data['location'],
-    people_now_present=api_data['sensors']['people_now_present'][0]['value'],
-    names=people
-)
+    'status_message': api_data['state']['message'],
+    'status_icon': icon,
+    'logo': api_data['logo'],
+    'url': api_data['url'],
+    'location': api_data['location'],
+    'people_now_present': api_data['sensors']['people_now_present'][0]['value'],
+    'names': people,
+    'temperatures': False,
+}
+
+for plugin in config.PLUGINS:
+    try:
+        plugin_module = getattr(
+            __import__("plugins.%s" % plugin, plugin).__dict__[plugin],
+            plugin + "_html"
+        )
+    except Exception as e:
+        print(e)
+
+    old_args = html_parser_args
+    try:
+        html_parser_args = plugin_module(api_data, html_parser_args)
+    except:
+        html_parser_args = old_args
+
+html_template = Template(open(config.TEMPLATE_PATH).read().decode('utf-8'))
+html = html_template.render(**html_parser_args)
 
 with open(config.HTML_PATH, 'wb+') as html_out:
     html_out.write(html.encode('utf-8'))
