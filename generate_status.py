@@ -19,12 +19,12 @@ for plugin in config.PLUGINS:
         )
     except Exception as e:
         print(e)
-
-    old_data = api_data
-    try:
-        api_data = plugin_module(api_data)
-    except:
-        api_data = old_data
+    else:
+        old_data = api_data
+        try:
+            api_data = plugin_module(api_data)
+        except:
+            api_data = old_data
 
 
 # The next part will generate the HTML for the status page
@@ -63,13 +63,13 @@ for plugin in config.PLUGINS:
             plugin + "_html"
         )
     except Exception as e:
-        print(e)
-
-    old_args = html_parser_args
-    try:
-        html_parser_args = plugin_module(api_data, html_parser_args)
-    except:
-        html_parser_args = old_args
+        pass
+    else:
+        old_args = html_parser_args
+        try:
+            html_parser_args = plugin_module(api_data, html_parser_args)
+        except:
+            html_parser_args = old_args
 
 html_template = Template(open(config.TEMPLATE_PATH).read().decode('utf-8'))
 html = html_template.render(**html_parser_args)
