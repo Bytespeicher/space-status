@@ -10,11 +10,13 @@ from jinja2 import Template
 
 import config
 
+api_data = config.API_DATA.copy()
+
 try:
-    api_data = json.loads(requests.get(config.API_URL, timeout=5).text)
+    new_api_data = json.loads(requests.get(config.API_URL, timeout=5).text)
+    api_data.update(new_api_data)
 except (requests.ReadTimeout, requests.ConnectionError):
-    print("Error while connecting")
-    sys.exit(1)
+    print("Error while connecting to status GW, using defaults")
 
 for plugin in config.PLUGINS:
     try:
