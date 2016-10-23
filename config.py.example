@@ -52,6 +52,12 @@ API_DATA = {
         "open": "http://status.bytespeicher.org/status_open.png",
         "closed": "http://status.bytespeicher.org/status_closed.png"
     },
+    "feeds": {
+          "calendar": {
+                   "type": "ical",
+                   "url": "https://calendar.google.com/calendar/ical/2eskb61g20prl65k2qd01uktis%40group.calendar.google.com/public/basic.ics"
+          }
+    }, 
     "sensors": {
         "people_now_present": [{
             "value": 0
