@@ -48,6 +48,7 @@
 	</script>
 	<style>
 		.green { color: #3d9f35; }
+          .yellow{ color: #ecec13; }
 		.red   { color: #832c2c; }
 		.orange{ color: #a28c2c; }
 	</style>
@@ -67,7 +68,11 @@
 		</div>
 		<div class="grid_9">
 			{% if status_open %}
+                   {% if status_open == "members_only" %}
+                    <h2>Der Bytespeicher ist <span class="yellow">nur für Mitglieder offen</span></h2>
+                   {% else %}
 				<h2>Der Bytespeicher ist <span class="green">offen</span></h2>
+                   {% endif %}
 			{% elif status_open is none %}
 				<h2>Der Bytespeicher ist <span class="orange">undefiniert</span></h2>
 			{% else %}

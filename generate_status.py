@@ -32,8 +32,12 @@ with open(config.SAVE_PATH, 'w') as f:
     f.write(json.dumps(api_data))
     f.close()
 
-if api_data['state']['open'] is True:
-    icon = api_data['icon']['open']
+if bool(api_data['state']['open']) == True:
+    if api_data['state']['open'] == "members_only":
+        icon = api_data['icon']['members_only']
+    #enter additional states as elifs here
+    else:
+        icon = api_data['icon']['open']
 else:
     icon = api_data['icon']['closed']
 

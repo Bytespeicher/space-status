@@ -14,7 +14,7 @@ PLUGINS = {
 }
 
 API_DATA = {
-    "api": "0.13",
+    "api": "0.14a",
     "space": "Bytespeicher",
     "logo": "https://pbs.twimg.com/profile_images/378800000769511011/a000ec284ff2e7966373b95aa2054864.jpeg",
     "url": "https://bytespeicher.org",
@@ -40,6 +40,7 @@ API_DATA = {
     "state": {
         "icon": {
             "open": "http://status.bytespeicher.org/status_open.png",
+            "members_only": "http://status.bytespeicher.org/status_members_only.png",
             "closed": "http://status.bytespeicher.org/status_closed.png"
         },
         "open": None,
@@ -50,6 +51,7 @@ API_DATA = {
     "open": False,
     "icon": {
         "open": "http://status.bytespeicher.org/status_open.png",
+        "members_only": "http://status.bytespeicher.org/status_members_only.png",
         "closed": "http://status.bytespeicher.org/status_closed.png"
     },
     "feeds": {
