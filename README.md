@@ -10,3 +10,10 @@ and a script aggregating the status JSON from a WiFi router.
 information about the devices in our WiFi network to tell wether someone is 
 connected and thus the space is open. This is of course just an approximation 
 but it's cheap and works pretty well with a low DHCP lease time.
+
+### Usage: ###
+
+* Copy `config.py.example` to `config.py` and adapt settings (at least file paths for output and includes)
+* Copy `includes/` folder to the build folder specified in `config.py`
+
+* execute `python generate_status.py`

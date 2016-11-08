@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import sys
@@ -71,7 +71,7 @@ for plugin in config.PLUGINS:
         except:
             html_parser_args = old_args
 
-html_template = Template(open(config.TEMPLATE_PATH).read().decode('utf-8'))
+html_template = Template(open(config.TEMPLATE_PATH, encoding='utf-8').read())
 html = html_template.render(**html_parser_args)
 
 with open(config.HTML_PATH, 'wb+') as html_out:
